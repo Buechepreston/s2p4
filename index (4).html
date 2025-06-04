@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Food Questions App</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Or use styles-minimal.css for a cleaner look -->
+  <!-- <link rel="stylesheet" href="styles-minimal.css" /> -->
+</head>
+<body>
+  <div class="container" id="question-page">
+    <h1 class="title">Food Questions</h1>
+
+    <div class="question">
+      <label for="food1" class="question-text">Which meal do you look forward to the most?</label>
+      <select id="food1" class="dropdown">
+        <option value="" disabled selected>Select an option...</option>
+        <option value="breakfast">Breakfast</option>
+        <option value="lunch">Lunch</option>
+        <option value="dinner">Dinner</option>
+        <option value="snacks">Snacks</option>
+      </select>
+    </div>
+
+    <div class="question">
+      <label for="food2" class="question-text">How do you prefer to enjoy your food?</label>
+      <select id="food2" class="dropdown">
+        <option value="" disabled selected>Select an option...</option>
+        <option value="home_cooked">Home-cooked meal</option>
+        <option value="restaurant">Restaurant dining</option>
+        <option value="street_food">Street food</option>
+        <option value="takeout">Takeout/Delivery</option>
+      </select>
+    </div>
+
+    <div class="question">
+      <label for="food3" class="question-text">What describes your food adventure style?</label>
+      <select id="food3" class="dropdown">
+        <option value="" disabled selected>Select an option...</option>
+        <option value="new_cuisine">Try a new cuisine</option>
+        <option value="favorites">Stick to favorites</option>
+        <option value="mix_match">Mix and match</option>
+        <option value="recipe">Follow a recipe</option>
+      </select>
+    </div>
+
+    <button id="submit-btn" class="submit-button">Submit</button>
+  </div>
+
+  <div class="container" id="recommendation-page" style="display:none;">
+    <div style="display:flex; flex-direction:column; align-items:center;">
+      <div style="font-size:3rem; margin-bottom:18px; color:#43c6ac;">🍽️</div>
+      <h1 class="title" style="margin-bottom:10px;">Your Food Recommendation</h1>
+      <div id="recommendation-text" class="recommendation-highlight"></div>
+      <button id="back-btn" class="submit-button" style="margin-top:32px; width:80%;">Back to Questions</button>
+    </div>
+  </div>
+
+  <script>
+    function getRecommendation(q1, q2, q3) {
+      if (q1 === 'breakfast') {
+        if (q2 === 'home_cooked') return 'How about homemade avocado toast with poached eggs?';
+        if (q2 === 'restaurant') return 'Try a classic eggs benedict at your favorite brunch spot!';
+        if (q2 === 'street_food') return 'Grab a breakfast burrito from a local food truck!';
+        if (q2 === 'takeout') return 'Order a fresh bagel with cream cheese and lox.';
+      }
+      if (q1 === 'lunch') {
+        if (q3 === 'new_cuisine') return 'Explore a Vietnamese banh mi sandwich for lunch!';
+        if (q3 === 'favorites') return 'Enjoy a classic grilled cheese and tomato soup.';
+        if (q3 === 'mix_match') return 'Build your own poke bowl with your favorite toppings!';
+        if (q3 === 'recipe') return 'Try making homemade falafel wraps.';
+      }
+      if (q1 === 'dinner') {
+        if (q2 === 'restaurant') return 'Treat yourself to sushi at a Japanese restaurant.';
+        if (q2 === 'home_cooked') return 'Cook a hearty pasta with roasted vegetables.';
+        if (q2 === 'street_food') return 'Find a taco truck and try some authentic tacos!';
+        if (q2 === 'takeout') return 'Order Thai curry with jasmine rice.';
+      }
+      if (q1 === 'snacks') {
+        if (q3 === 'new_cuisine') return 'Try Korean tteokbokki (spicy rice cakes) as a snack!';
+        if (q3 === 'favorites') return 'Enjoy some classic nachos with cheese.';
+        if (q3 === 'mix_match') return 'Make a snack platter with fruit, cheese, and crackers.';
+        if (q3 === 'recipe') return 'Bake some homemade granola bars.';
+      }
+      return 'Try something new today—let your cravings guide you!';
+    }
+
+    document.getElementById('submit-btn').addEventListener('click', function() {
+      const q1 = document.getElementById('food1').value;
+      const q2 = document.getElementById('food2').value;
+      const q3 = document.getElementById('food3').value;
+      const rec = getRecommendation(q1, q2, q3);
+      document.getElementById('recommendation-text').textContent = rec;
+      document.getElementById('question-page').style.display = 'none';
+      document.getElementById('recommendation-page').style.display = 'block';
+    });
+
+    document.getElementById('back-btn').addEventListener('click', function() {
+      document.getElementById('recommendation-page').style.display = 'none';
+      document.getElementById('question-page').style.display = 'block';
+      document.getElementById('food1').selectedIndex = 0;
+      document.getElementById('food2').selectedIndex = 0;
+      document.getElementById('food3').selectedIndex = 0;
+    });
+  </script>
+</body>
+</html>
