@@ -1,4 +1,4 @@
-Preston Bueche
-Cameron Southern 
-Ahmir Wiggins
+Preston Bueche, 
+Cameron Southern, 
+Ahmir Wiggins,
 Natalie D
